@@ -21,20 +21,20 @@
   
     <meta name="description" content="同学们，code时遇到问题不用怕，可以参考下面操作提示： 一、使用DeepSeek排除故障：直接将报错信息复制粘贴给DeepSeek，输入“提示错误”+粘贴错误信息。打开联网搜索，点击发送。收到结果后，根据AI提示结果逐步排查即可。code时一定注意缩进位置关系，和标点符号。 你会发现当你解决了你的第一个问题的时候，我们常常提到的那个“套路”一目了然了。这种事嘛，就得“先开枪，后画靶”。  二、提">
 <meta property="og:type" content="article">
-<meta property="og:title" content="让AI帮助你">
+<meta property="og:title" content="让AI帮助你编程（Code）和整理文字（Word）">
 <meta property="og:url" content="https://alphaorionis.top/2025/04/21/promptcode/index.html">
 <meta property="og:site_name" content="AhphaOrionis">
 <meta property="og:description" content="同学们，code时遇到问题不用怕，可以参考下面操作提示： 一、使用DeepSeek排除故障：直接将报错信息复制粘贴给DeepSeek，输入“提示错误”+粘贴错误信息。打开联网搜索，点击发送。收到结果后，根据AI提示结果逐步排查即可。code时一定注意缩进位置关系，和标点符号。 你会发现当你解决了你的第一个问题的时候，我们常常提到的那个“套路”一目了然了。这种事嘛，就得“先开枪，后画靶”。  二、提">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2025-04-21T14:44:03.091Z">
-<meta property="article:modified_time" content="2025-04-21T15:20:20.032Z">
+<meta property="article:modified_time" content="2025-05-06T05:40:25.315Z">
 <meta property="article:author" content="Libo Yu">
 <meta property="article:tag" content="心得分享">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>让AI帮助你 - AhphaOrionis</title>
+  <title>让AI帮助你编程（Code）和整理文字（Word） - AhphaOrionis</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -200,7 +200,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="让AI帮助你"></span>
+            <span id="subtitle" data-typed-text="让AI帮助你编程（Code）和整理文字（Word）"></span>
           
         </div>
 
@@ -223,7 +223,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          676 字
+          1.1k 字
         
       </span>
     
@@ -234,7 +234,7 @@
         
         
         
-          6 分钟
+          10 分钟
         
       </span>
     
@@ -271,7 +271,7 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">让AI帮助你</h1>
+            <h1 id="seo-header">让AI帮助你编程（Code）和整理文字（Word）</h1>
             
             
               <div class="markdown-body">
@@ -285,6 +285,11 @@
 <p>第一次AI给出的代码不一定能完美运行，但你可以不断的盘它。<br>参考“一、使用DeepSeek排除故障”，这就是不断优化的过程。<br>最终优化到自己想要的结果。</p>
 <hr>
 <h2 id="三、将Cline或Continue部署到VScode使用AI"><a href="#三、将Cline或Continue部署到VScode使用AI" class="headerlink" title="三、将Cline或Continue部署到VScode使用AI"></a>三、将Cline或Continue部署到VScode使用AI</h2><p>要注意项目的框架结构<br>也可以使用MCP工具帮助你</p>
+<hr>
+<h2 id="四、Word排版提示词示例："><a href="#四、Word排版提示词示例：" class="headerlink" title="四、Word排版提示词示例："></a>四、Word排版提示词示例：</h2><p>当你向DeepSeek提问生成文字时，经常会想怎么让AI能够给你一个直观粗暴的一键下载按钮，而不是一行一行复制粘贴。<br>下面这个示例是帮助你理解和解决整理文档的思路：<br>我们让DeepSeek根据要求生成文字，可直接在提示词中的需求进行添加修改内容；是否消除人工智能痕迹则根据文字的实际应用场景来判断；段落格式是我们想要在Word文档中呈现的版式，可根据需求进行调整；最终让AI给我们生成一个html文件供我们下载。<br>这里需要注意的是DeepSeek并不能直接为我们生成微软Office的Word文档，所以我们需要将上面步骤生成的html文件下载下来，然后用Word方式打开，最后再另存为Word文档。这样，我们需要的内容、版式和整体Word文件就完成了。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment">## 需求：</span><br><span class="hljs-comment"># 消除人工智能痕迹。</span><br><br><span class="hljs-comment"># 格式和排版要求如下：</span><br>-一级标题 字体为宋体（三号），行距24磅值，段后空0.5行<br>-二级标题 字体为黑体（三号），行距24磅值，段后空0.5行<br>-正文 三号仿宋GB-2312字体，对齐方式为两端对齐，首行缩进两个字符<br><br><span class="hljs-comment"># 用html的格式输出，需要有能直接下载word文档的功能，并且能直接下载word文件。</span><br></code></pre></td></tr></table></figure>
+<p>根据示例内容可以不断调整优化。<br>对于办公、通知、论文等格式固定的内容，我们可以套用这种方法进行排版，避免大量重复低效的工作。</p>
+<hr>
 
                 
               </div>
@@ -309,7 +314,7 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>让AI帮助你</div>
+      <div>让AI帮助你编程（Code）和整理文字（Word）</div>
       <div>https://alphaorionis.top/2025/04/21/promptcode/</div>
     </div>
     <div class="license-meta">
