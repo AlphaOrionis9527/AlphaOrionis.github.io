@@ -27,7 +27,7 @@
 <meta property="og:description" content="以下是针对Windows系统实践场景的操作，macOS同理。 一、功能：以下是PowerShell在办公场景中的实用应用列表：12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2025-04-24T04:27:50.809Z">
-<meta property="article:modified_time" content="2025-06-15T16:11:15.946Z">
+<meta property="article:modified_time" content="2025-06-15T16:22:47.459Z">
 <meta property="article:author" content="Libo Yu">
 <meta property="article:tag" content="Technical Manual">
 <meta name="twitter:card" content="summary_large_image">
@@ -223,7 +223,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          3.3k 字
+          3.4k 字
         
       </span>
     
@@ -291,11 +291,12 @@
 <p>返回以上信息，代表安装成功。</p>
 <p>配置好后，此时需要新开一个CMD，输入MCP验证是否生效。</p>
 <p>代码环境搭建完成。</p>
-<h2 id="配置json文件："><a href="#配置json文件：" class="headerlink" title="配置json文件："></a>配置json文件：</h2><h3 id="配置Claude-json文件："><a href="#配置Claude-json文件：" class="headerlink" title="配置Claude json文件："></a>配置Claude json文件：</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs bash"><br>&#123;<br>  <span class="hljs-string">&quot;mcpServers&quot;</span>: &#123;<br>    <span class="hljs-string">&quot;powershell&quot;</span>: &#123;<br>      <span class="hljs-string">&quot;command&quot;</span>: <span class="hljs-string">&quot;python&quot;</span>,<br>      <span class="hljs-string">&quot;args&quot;</span>: [<br>        <span class="hljs-string">&quot;C:\\Users\\root\\Desktop\\MCP\\powershell.py&quot;</span>（这里写你自己的路径）<br>      ]<br>    &#125;<br>  &#125;<br>&#125;<br><br></code></pre></td></tr></table></figure>
+<h2 id="配置json文件："><a href="#配置json文件：" class="headerlink" title="配置json文件："></a>配置json文件：</h2><h3 id="配置json文件内容如下："><a href="#配置json文件内容如下：" class="headerlink" title="配置json文件内容如下："></a>配置json文件内容如下：</h3><p>注意修改文件路径。<br>可以通过Claude调用，也可以用cursor，或者VScode+Cline。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs bash"><br>&#123;<br>  <span class="hljs-string">&quot;mcpServers&quot;</span>: &#123;<br>    <span class="hljs-string">&quot;powershell&quot;</span>: &#123;<br>      <span class="hljs-string">&quot;command&quot;</span>: <span class="hljs-string">&quot;python&quot;</span>,<br>      <span class="hljs-string">&quot;args&quot;</span>: [<br>        <span class="hljs-string">&quot;C:\\Users\\root\\Desktop\\MCP\\powershell.py&quot;</span>（这里写你自己的路径）<br>      ]<br>    &#125;<br>  &#125;<br>&#125;<br><br></code></pre></td></tr></table></figure>
 
 <p>打开Claude，工具生效。</p>
 <p>powershell可以对你的电脑做你任何想做的事情。</p>
-<p>如：<br>根据文件做个小报告。<br>桌面上有哪些文件？整理XXX文件到XXX文件夹。</p>
+<p>如：<br>根据文件做个小报告。<br>桌面上有哪些文件？整理XXX文件到XXX文件夹。<br>操作具体Excel、CSV，根据内容生成专业的HTML可视化分析报告。</p>
 <p>个人认为，使用体验总体要比filesystem-mcp强大。</p>
 
                 
