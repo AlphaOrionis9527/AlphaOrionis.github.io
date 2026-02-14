@@ -18,23 +18,15 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '20'
-          cache: 'npm'
 
       - name: Install Dependencies
         run: npm install
 
-      - name: Install hexo-deployer-git
-        run: npm install hexo-deployer-git
+      - name: Generate Static Files
+        run: npx hexo generate
 
-      - name: Configure git
-        run: |
-          git config --global user.name "AlphaOrionis9527"
-          git config --global user.email "58055185@qq.com"
-
-      - name: Deploy
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          hexo clean
-          hexo generate
-          hexo deploy
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./public
