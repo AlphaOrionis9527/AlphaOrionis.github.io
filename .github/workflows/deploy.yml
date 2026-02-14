@@ -13,7 +13,6 @@ jobs:
         with:
           ref: source
           fetch-depth: 0
-          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -43,4 +42,9 @@ jobs:
         run: |
           hexo clean
           hexo generate
-          hexo deploy --token=${{ secrets.GITHUB_TOKEN }}
+          # 直接用 git 推送到 main 分支
+          cd public
+          git init
+          git add .
+          git commit -m "Deploy $(date)"
+          git push -f https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/AlphaOrionis9527/AlphaOrionis.github.io.git main
