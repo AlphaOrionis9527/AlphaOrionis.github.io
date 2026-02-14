@@ -1,0 +1,685 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Libo Yu">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="以下是针对 Windows11 系统实践场景的操作。macOS通过PD虚拟机安装Windows即可轻松实现，将操作放到虚拟环境能够防止一些AI误操作风险。 一、功能：以下是PowerShell在办公场景中的实用应用列表：123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495">
+<meta property="og:type" content="article">
+<meta property="og:title" content="AI终端-Powershell-MCP-Server">
+<meta property="og:url" content="https://alphaorionis.top/2025/04/24/AI_MCP_Powershell_Server/index.html">
+<meta property="og:site_name" content="AhphaOrionis">
+<meta property="og:description" content="以下是针对 Windows11 系统实践场景的操作。macOS通过PD虚拟机安装Windows即可轻松实现，将操作放到虚拟环境能够防止一些AI误操作风险。 一、功能：以下是PowerShell在办公场景中的实用应用列表：123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-04-24T04:27:50.809Z">
+<meta property="article:modified_time" content="2025-06-18T08:33:04.456Z">
+<meta property="article:author" content="Libo Yu">
+<meta property="article:tag" content="Technical Manual">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>AI终端-Powershell-MCP-Server - AhphaOrionis</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"alphaorionis.top","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>AlphaOrionis</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="AI终端-Powershell-MCP-Server"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-04-24 12:27" pubdate>
+          2025年4月24日 中午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          3.6k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          30 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">AI终端-Powershell-MCP-Server</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p>以下是针对 Windows11 系统实践场景的操作。<br>macOS通过PD虚拟机安装Windows即可轻松实现，将操作放到虚拟环境能够防止一些AI误操作风险。</p>
+<h2 id="一、功能："><a href="#一、功能：" class="headerlink" title="一、功能："></a>一、功能：</h2><h3 id="以下是PowerShell在办公场景中的实用应用列表："><a href="#以下是PowerShell在办公场景中的实用应用列表：" class="headerlink" title="以下是PowerShell在办公场景中的实用应用列表："></a>以下是PowerShell在办公场景中的实用应用列表：</h3><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><code class="hljs matlab">📁 文件管理自动化<br><br>批量重命名文件 - 统一命名规范，如<span class="hljs-string">&quot;合同_2025_001.pdf&quot;</span><br>文件分类整理 - 按日期、类型自动分文件夹<br>查找重复文件 - 清理重复的文档和图片<br>文件夹结构创建 - 快速创建项目文件夹模板<br>大文件查找 - 找出占用空间大的文件进行清理<br><br>📊 数据处理和报表<br><br>Excel数据批量处理 - 合并多个Excel文件<br>CSV文件转换 - 格式转换和数据清洗<br>文件统计报告 - 生成文件数量、大小统计<br>日志分析 - 提取关键信息生成报告<br>数据备份验证 - 检查备份文件完整性<br><br>📧 办公自动化<br><br>邮件附件批量下载 - 从Outlook提取附件<br>文档格式批量转换 - Word转PDF、图片格式转换<br>打印任务管理 - 批量打印文档<br>快捷方式批量创建 - 为常用文件夹创建桌面快捷方式<br>软件安装检查 - 检查办公软件版本和更新<br><br>🔍 信息收集和监控<br><br>网络连接监控 - 检查办公网络状态<br>系统性能监控 - 监控电脑运行状态<br>磁盘空间警报 - 空间不足时自动提醒<br>文件变更监控 - 监控重要文件夹的变化<br>设备状态检查 - 打印机、网络设备状态<br><br>📅 时间和任务管理<br><br>定时提醒 - 会议、截止日期提醒<br>工作日志生成 - 自动记录每日文件操作<br>任务计划执行 - 定时备份、清理等操作<br>考勤辅助 - 记录开关机时间<br>项目进度跟踪 - 文件修改时间统计<br><br>🛠️ 系统维护<br><br>临时文件清理 - 定期清理系统垃圾<br>软件卸载 - 批量卸载不需要的程序<br>注册表清理 - 清理无效注册表项<br>启动项管理 - 优化开机启动速度<br>系统信息收集 - 生成电脑配置报告<br><br>📋 文档和内容处理<br><br>文档内容搜索 - 在多个文档中搜索关键词<br>图片批处理 - 压缩、调整尺寸、水印添加<br>文本提取 - 从PDF、图片中提取文字<br>模板应用 - 批量应用文档模板<br>版本控制 - 文档版本管理和比较<br><br>🔐 安全和合规<br><br>文件权限管理 - 批量设置文件访问权限<br>敏感信息检查 - 扫描文档中的敏感数据<br>密码生成 - 生成安全密码<br>文件加密备份 - 重要文件的安全备份<br>访问日志分析 - 分析文件访问记录<br><br>📈 效率提升工具<br><br>快速启动菜单 - 创建常用程序启动脚本<br>工作环境配置 - 一键配置工作桌面布局<br>批量操作模板 - 保存常用操作为脚本<br>数据验证 - 批量验证数据格式和完整性<br>报告自动生成 - 定期生成各类统计报告<br><br>这些场景都能显著提高办公效率，减少重复性工作，让文员可以专注于更有价值的任务。你对哪个场景最感兴趣？我可以详细展示具体的实现方法。<br></code></pre></td></tr></table></figure>
+<hr>
+<h2 id="二、场景："><a href="#二、场景：" class="headerlink" title="二、场景："></a>二、场景：</h2><h3 id="通过PowerShell工具，你可以做很多有趣和实用的事情！以下是一些有趣的应用场景："><a href="#通过PowerShell工具，你可以做很多有趣和实用的事情！以下是一些有趣的应用场景：" class="headerlink" title="通过PowerShell工具，你可以做很多有趣和实用的事情！以下是一些有趣的应用场景："></a>通过PowerShell工具，你可以做很多有趣和实用的事情！以下是一些有趣的应用场景：</h3><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><code class="hljs matlab">通过PowerShell工具，你可以做很多有趣和实用的事情！以下是一些有趣的应用场景：<br>系统管理和监控<br><br>实时监控CPU、内存、磁盘使用情况<br>查看和管理正在运行的进程和服务<br>监控网络连接状态和流量<br>检查系统启动时间和运行状态<br>管理Windows防火墙规则<br><br>文件和数据处理<br><br>批量重命名文件和文件夹<br>查找重复文件并清理磁盘空间<br>批量处理图片、文档等文件属性<br>创建文件备份和同步脚本<br>分析文件夹大小和文件分布统计<br><br>网络和安全<br><br>扫描本地网络中的设备<br>检查开放端口和网络服务<br>监控网络延迟和连接质量<br>获取WiFi密码和网络配置<br>检查系统安全更新状态<br><br>自动化任务<br><br>定时清理临时文件和缓存<br>自动化软件安装和配置<br>批量创建用户账户和权限设置<br>自动备份重要文件到指定位置<br>定时发送系统状态报告<br><br>趣味功能<br><br>创建ASCII艺术和文字画<br>生成随机密码和UUID<br>播放系统声音或文字转语音<br>控制系统音量和电源设置<br>创建桌面壁纸幻灯片<br><br>开发辅助<br><br>批量处理代码文件格式化<br>检查端口占用和服务状态<br>管理环境变量和路径设置<br>快速搭建本地测试环境<br>监控文件变化并触发操作<br><br>数据分析<br><br>分析日志文件和错误报告<br>统计文件类型和大小分布<br>监控系统性能趋势<br>生成各种格式的报告<br>处理CSV和JSON数据<br><br>这些都可以通过PowerShell实现，既实用又有趣！你对哪个方面比较感兴趣？我可以帮你实际演示一些功能。<br></code></pre></td></tr></table></figure>
+<hr>
+<h2 id="三、代码："><a href="#三、代码：" class="headerlink" title="三、代码："></a>三、代码：</h2><h3 id="代码文件，用于复制后在VScode或Pycharm中新建Python文件powershell-py后粘贴："><a href="#代码文件，用于复制后在VScode或Pycharm中新建Python文件powershell-py后粘贴：" class="headerlink" title="代码文件，用于复制后在VScode或Pycharm中新建Python文件powershell.py后粘贴："></a>代码文件，用于复制后在VScode或Pycharm中新建Python文件powershell.py后粘贴：</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br></pre></td><td class="code"><pre><code class="hljs bash">import subprocess<br>import json<br>import sys<br>import os<br>from mcp.server.fastmcp import FastMCP<br><br>mcp = FastMCP(<span class="hljs-string">&quot;PowerShell Toolkit&quot;</span>)<br><br>@mcp.tool()<br>def powershell_command(<span class="hljs-built_in">command</span>: str, <span class="hljs-built_in">timeout</span>: int = 30, encoding: str = <span class="hljs-string">&#x27;utf-8&#x27;</span>):<br>    <span class="hljs-string">&quot;&quot;</span><span class="hljs-string">&quot;</span><br><span class="hljs-string">    Execute PowerShell command and return the result.</span><br><span class="hljs-string">    </span><br><span class="hljs-string">    Args:</span><br><span class="hljs-string">        command (str): PowerShell command to execute</span><br><span class="hljs-string">        timeout (int): Command timeout in seconds (default: 30)</span><br><span class="hljs-string">        encoding (str): Output encoding (default: utf-8)</span><br><span class="hljs-string">        </span><br><span class="hljs-string">    Returns:</span><br><span class="hljs-string">        dict: Contains success status, output, and error information</span><br><span class="hljs-string">    &quot;</span><span class="hljs-string">&quot;&quot;</span><br>    try:<br>        <span class="hljs-comment"># 检测系统和PowerShell版本</span><br>        powershell_executable = _get_powershell_executable()<br>        <br>        <span class="hljs-comment"># 构建PowerShell命令，设置输出编码</span><br>        <span class="hljs-keyword">if</span> sys.platform == <span class="hljs-string">&quot;win32&quot;</span>:<br>            <span class="hljs-comment"># Windows系统，解决中文编码问题</span><br>            powershell_cmd = [<br>                powershell_executable,<br>                <span class="hljs-string">&#x27;-NoProfile&#x27;</span>,<br>                <span class="hljs-string">&#x27;-OutputFormat&#x27;</span>, <span class="hljs-string">&#x27;Text&#x27;</span>,<br>                <span class="hljs-string">&#x27;-Command&#x27;</span>,<br>                f<span class="hljs-string">&#x27;[Console]::OutputEncoding = [System.Text.Encoding]::UTF8; &#123;command&#125;&#x27;</span><br>            ]<br>        <span class="hljs-keyword">else</span>:<br>            <span class="hljs-comment"># 非Windows系统</span><br>            powershell_cmd = [<br>                powershell_executable,<br>                <span class="hljs-string">&#x27;-NoProfile&#x27;</span>,<br>                <span class="hljs-string">&#x27;-Command&#x27;</span>,<br>                <span class="hljs-built_in">command</span><br>            ]<br>        <br>        <span class="hljs-comment"># 设置环境变量以支持UTF-8</span><br>        <span class="hljs-built_in">env</span> = os.environ.copy()<br>        <span class="hljs-keyword">if</span> sys.platform == <span class="hljs-string">&quot;win32&quot;</span>:<br>            <span class="hljs-built_in">env</span>[<span class="hljs-string">&#x27;PYTHONIOENCODING&#x27;</span>] = <span class="hljs-string">&#x27;utf-8&#x27;</span><br>        <br>        <span class="hljs-comment"># 执行命令</span><br>        result = subprocess.run(<br>            powershell_cmd,<br>            capture_output=True,<br>            text=True,<br>            <span class="hljs-built_in">timeout</span>=<span class="hljs-built_in">timeout</span>,<br>            encoding=encoding,<br>            errors=<span class="hljs-string">&#x27;replace&#x27;</span>,  <span class="hljs-comment"># 处理编码错误</span><br>            <span class="hljs-built_in">env</span>=<span class="hljs-built_in">env</span><br>        )<br>        <br>        <span class="hljs-comment"># 构建返回结果</span><br>        response = &#123;<br>            <span class="hljs-string">&quot;success&quot;</span>: result.returncode == 0,<br>            <span class="hljs-string">&quot;return_code&quot;</span>: result.returncode,<br>            <span class="hljs-string">&quot;stdout&quot;</span>: result.stdout.strip() <span class="hljs-keyword">if</span> result.stdout <span class="hljs-keyword">else</span> <span class="hljs-string">&quot;&quot;</span>,<br>            <span class="hljs-string">&quot;stderr&quot;</span>: result.stderr.strip() <span class="hljs-keyword">if</span> result.stderr <span class="hljs-keyword">else</span> <span class="hljs-string">&quot;&quot;</span>,<br>            <span class="hljs-string">&quot;command&quot;</span>: <span class="hljs-built_in">command</span>,<br>            <span class="hljs-string">&quot;powershell_version&quot;</span>: powershell_executable<br>        &#125;<br>        <br>        <span class="hljs-comment"># 格式化输出</span><br>        <span class="hljs-keyword">if</span> response[<span class="hljs-string">&quot;success&quot;</span>]:<br>            <span class="hljs-keyword">if</span> response[<span class="hljs-string">&quot;stdout&quot;</span>]:<br>                <span class="hljs-built_in">return</span> f<span class="hljs-string">&quot;✅ Command executed successfully:\n\n&#123;response[&#x27;stdout&#x27;]&#125;&quot;</span><br>            <span class="hljs-keyword">else</span>:<br>                <span class="hljs-built_in">return</span> <span class="hljs-string">&quot;✅ Command executed successfully (no output)&quot;</span><br>        <span class="hljs-keyword">else</span>:<br>            error_msg = response[<span class="hljs-string">&quot;stderr&quot;</span>] <span class="hljs-keyword">if</span> response[<span class="hljs-string">&quot;stderr&quot;</span>] <span class="hljs-keyword">else</span> <span class="hljs-string">&quot;Unknown error&quot;</span><br>            <span class="hljs-built_in">return</span> f<span class="hljs-string">&quot;❌ Command failed (Exit Code: &#123;response[&#x27;return_code&#x27;]&#125;):\n\n&#123;error_msg&#125;&quot;</span><br>            <br>    except subprocess.TimeoutExpired:<br>        <span class="hljs-built_in">return</span> f<span class="hljs-string">&quot;⏰ Command timed out after &#123;timeout&#125; seconds&quot;</span><br>    except FileNotFoundError:<br>        <span class="hljs-built_in">return</span> f<span class="hljs-string">&quot;❌ PowerShell not found. Please ensure PowerShell is installed and in PATH.\nTried: &#123;powershell_executable&#125;&quot;</span><br>    except Exception as e:<br>        <span class="hljs-built_in">return</span> f<span class="hljs-string">&quot;❌ Unexpected error: &#123;str(e)&#125;&quot;</span><br><br>def _get_powershell_executable():<br>    <span class="hljs-string">&quot;&quot;</span><span class="hljs-string">&quot;</span><br><span class="hljs-string">    检测可用的PowerShell可执行文件</span><br><span class="hljs-string">    &quot;</span><span class="hljs-string">&quot;&quot;</span><br>    <span class="hljs-keyword">if</span> sys.platform == <span class="hljs-string">&quot;win32&quot;</span>:<br>        <span class="hljs-comment"># Windows系统，优先使用PowerShell 7，然后是Windows PowerShell</span><br>        candidates = [<br>            <span class="hljs-string">&#x27;pwsh&#x27;</span>,  <span class="hljs-comment"># PowerShell 7+</span><br>            <span class="hljs-string">&#x27;powershell&#x27;</span>  <span class="hljs-comment"># Windows PowerShell 5.x</span><br>        ]<br>    <span class="hljs-keyword">else</span>:<br>        <span class="hljs-comment"># Linux/macOS系统</span><br>        candidates = [<br>            <span class="hljs-string">&#x27;pwsh&#x27;</span>,  <span class="hljs-comment"># PowerShell Core</span><br>            <span class="hljs-string">&#x27;powershell&#x27;</span><br>        ]<br>    <br>    <span class="hljs-keyword">for</span> candidate <span class="hljs-keyword">in</span> candidates:<br>        try:<br>            subprocess.run([candidate, <span class="hljs-string">&#x27;-Version&#x27;</span>], <br>                         capture_output=True, <br>                         <span class="hljs-built_in">timeout</span>=5)<br>            <span class="hljs-built_in">return</span> candidate<br>        except (FileNotFoundError, subprocess.TimeoutExpired):<br>            <span class="hljs-built_in">continue</span><br>    <br>    <span class="hljs-comment"># 如果都找不到，返回默认值</span><br>    <span class="hljs-built_in">return</span> <span class="hljs-string">&#x27;powershell&#x27;</span> <span class="hljs-keyword">if</span> sys.platform == <span class="hljs-string">&quot;win32&quot;</span> <span class="hljs-keyword">else</span> <span class="hljs-string">&#x27;pwsh&#x27;</span><br><br>@mcp.tool()<br>def get_powershell_info():<br>    <span class="hljs-string">&quot;&quot;</span><span class="hljs-string">&quot;</span><br><span class="hljs-string">    获取PowerShell版本和系统信息</span><br><span class="hljs-string">    </span><br><span class="hljs-string">    Returns:</span><br><span class="hljs-string">        dict: PowerShell和系统信息</span><br><span class="hljs-string">    &quot;</span><span class="hljs-string">&quot;&quot;</span><br>    try:<br>        powershell_executable = _get_powershell_executable()<br>        <br>        <span class="hljs-comment"># 获取PowerShell版本信息</span><br>        version_cmd = [<br>            powershell_executable,<br>            <span class="hljs-string">&#x27;-NoProfile&#x27;</span>,<br>            <span class="hljs-string">&#x27;-Command&#x27;</span>,<br>            <span class="hljs-string">&#x27;$PSVersionTable | ConvertTo-Json&#x27;</span><br>        ]<br>        <br>        result = subprocess.run(<br>            version_cmd,<br>            capture_output=True,<br>            text=True,<br>            <span class="hljs-built_in">timeout</span>=10,<br>            encoding=<span class="hljs-string">&#x27;utf-8&#x27;</span>,<br>            errors=<span class="hljs-string">&#x27;replace&#x27;</span><br>        )<br>        <br>        <span class="hljs-keyword">if</span> result.returncode == 0:<br>            try:<br>                version_info = json.loads(result.stdout)<br>                <span class="hljs-built_in">return</span> f<span class="hljs-string">&quot;✅ PowerShell Information:\n\n&#123;json.dumps(version_info, indent=2, ensure_ascii=False)&#125;&quot;</span><br>            except json.JSONDecodeError:<br>                <span class="hljs-built_in">return</span> f<span class="hljs-string">&quot;✅ PowerShell Version (raw):\n\n&#123;result.stdout&#125;&quot;</span><br>        <span class="hljs-keyword">else</span>:<br>            <span class="hljs-built_in">return</span> f<span class="hljs-string">&quot;❌ Failed to get PowerShell version: &#123;result.stderr&#125;&quot;</span><br>            <br>    except Exception as e:<br>        <span class="hljs-built_in">return</span> f<span class="hljs-string">&quot;❌ Error getting PowerShell info: &#123;str(e)&#125;&quot;</span><br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&quot;__main__&quot;</span>:<br>    mcp.run()<br>    <br></code></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="四、环境："><a href="#四、环境：" class="headerlink" title="四、环境："></a>四、环境：</h2><h3 id="安装好Python环境，建议3-12或以上。窗口键-R，打开cmd命令输入："><a href="#安装好Python环境，建议3-12或以上。窗口键-R，打开cmd命令输入：" class="headerlink" title="安装好Python环境，建议3.12或以上。窗口键+R，打开cmd命令输入："></a>安装好Python环境，建议3.12或以上。窗口键+R，打开cmd命令输入：</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">pip install mcp[cli]<br></code></pre></td></tr></table></figure>
+<p>安装好MCP的这个SDK工具后会出现以下返回值：</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br></pre></td><td class="code"><pre><code class="hljs matlab">C:\Users\alphaorionis&gt;pip install <span class="hljs-string">&quot;mcp[cli]&quot;</span><br><br><br>#下面是返回值：<br><br>Defaulting to user installation because normal site-packages is not writeable<br>Collecting mcp[cli]<br>  Downloading mcp<span class="hljs-number">-1.6</span><span class="hljs-number">.0</span>-py3-none-any.whl.metadata (<span class="hljs-number">20</span> kB)<br>Collecting anyio&gt;=<span class="hljs-number">4.5</span> (from mcp[cli])<br>  Downloading anyio<span class="hljs-number">-4.9</span><span class="hljs-number">.0</span>-py3-none-any.whl.metadata (<span class="hljs-number">4.7</span> kB)<br>Collecting httpx-sse&gt;=<span class="hljs-number">0.4</span> (from mcp[cli])<br>  Using cached httpx_sse<span class="hljs-number">-0.4</span><span class="hljs-number">.0</span>-py3-none-any.whl.metadata (<span class="hljs-number">9.0</span> kB)<br>Collecting httpx&gt;=<span class="hljs-number">0.27</span> (from mcp[cli])<br>  Using cached httpx<span class="hljs-number">-0.28</span><span class="hljs-number">.1</span>-py3-none-any.whl.metadata (<span class="hljs-number">7.1</span> kB)<br>Collecting pydantic-settings&gt;=<span class="hljs-number">2.5</span><span class="hljs-number">.2</span> (from mcp[cli])<br>  Downloading pydantic_settings<span class="hljs-number">-2.9</span><span class="hljs-number">.1</span>-py3-none-any.whl.metadata (<span class="hljs-number">3.8</span> kB)<br>Collecting pydantic&lt;<span class="hljs-number">3.0</span><span class="hljs-number">.0</span>,&gt;=<span class="hljs-number">2.7</span><span class="hljs-number">.2</span> (from mcp[cli])<br>  Downloading pydantic<span class="hljs-number">-2.11</span><span class="hljs-number">.3</span>-py3-none-any.whl.metadata (<span class="hljs-number">65</span> kB)<br>Collecting sse-starlette&gt;=<span class="hljs-number">1.6</span><span class="hljs-number">.1</span> (from mcp[cli])<br>  Downloading sse_starlette<span class="hljs-number">-2.2</span><span class="hljs-number">.1</span>-py3-none-any.whl.metadata (<span class="hljs-number">7.8</span> kB)<br>Collecting starlette&gt;=<span class="hljs-number">0.27</span> (from mcp[cli])<br>  Downloading starlette<span class="hljs-number">-0.46</span><span class="hljs-number">.2</span>-py3-none-any.whl.metadata (<span class="hljs-number">6.2</span> kB)<br>Collecting uvicorn&gt;=<span class="hljs-number">0.23</span><span class="hljs-number">.1</span> (from mcp[cli])<br>  Downloading uvicorn<span class="hljs-number">-0.34</span><span class="hljs-number">.2</span>-py3-none-any.whl.metadata (<span class="hljs-number">6.5</span> kB)<br>Collecting python-dotenv&gt;=<span class="hljs-number">1.0</span><span class="hljs-number">.0</span> (from mcp[cli])<br>  Downloading python_dotenv<span class="hljs-number">-1.1</span><span class="hljs-number">.0</span>-py3-none-any.whl.metadata (<span class="hljs-number">24</span> kB)<br>Collecting typer&gt;=<span class="hljs-number">0.12</span><span class="hljs-number">.4</span> (from mcp[cli])<br>  Downloading typer<span class="hljs-number">-0.15</span><span class="hljs-number">.2</span>-py3-none-any.whl.metadata (<span class="hljs-number">15</span> kB)<br>Requirement already satisfied: idna&gt;=<span class="hljs-number">2.8</span> in c:\users\alphaorionis\appdata\local\packages\pythonsoftwarefoundation.python<span class="hljs-number">.3</span><span class="hljs-number">.13</span>_qbz5n2kfra8p0\localcache\local-packages\python313\site-packages (from anyio&gt;=<span class="hljs-number">4.5</span>-&gt;mcp[cli]) (<span class="hljs-number">3.10</span>)<br>Requirement already satisfied: sniffio&gt;=<span class="hljs-number">1.1</span> in c:\users\alphaorionis\appdata\local\packages\pythonsoftwarefoundation.python<span class="hljs-number">.3</span><span class="hljs-number">.13</span>_qbz5n2kfra8p0\localcache\local-packages\python313\site-packages (from anyio&gt;=<span class="hljs-number">4.5</span>-&gt;mcp[cli]) (<span class="hljs-number">1.3</span><span class="hljs-number">.1</span>)<br>Requirement already satisfied: certifi in c:\users\alphaorionis\appdata\local\packages\pythonsoftwarefoundation.python<span class="hljs-number">.3</span><span class="hljs-number">.13</span>_qbz5n2kfra8p0\localcache\local-packages\python313\site-packages (from httpx&gt;=<span class="hljs-number">0.27</span>-&gt;mcp[cli]) (<span class="hljs-number">2024.12</span><span class="hljs-number">.14</span>)<br>Collecting httpcore==<span class="hljs-number">1.</span>* (from httpx&gt;=<span class="hljs-number">0.27</span>-&gt;mcp[cli])<br>  Downloading httpcore<span class="hljs-number">-1.0</span><span class="hljs-number">.8</span>-py3-none-any.whl.metadata (<span class="hljs-number">21</span> kB)<br>Requirement already satisfied: h11&lt;<span class="hljs-number">0.15</span>,&gt;=<span class="hljs-number">0.13</span> in c:\users\alphaorionis\appdata\local\packages\pythonsoftwarefoundation.python<span class="hljs-number">.3</span><span class="hljs-number">.13</span>_qbz5n2kfra8p0\localcache\local-packages\python313\site-packages (from httpcore==<span class="hljs-number">1.</span>*-&gt;httpx&gt;=<span class="hljs-number">0.27</span>-&gt;mcp[cli]) (<span class="hljs-number">0.14</span><span class="hljs-number">.0</span>)<br>Collecting annotated-types&gt;=<span class="hljs-number">0.6</span><span class="hljs-number">.0</span> (from pydantic&lt;<span class="hljs-number">3.0</span><span class="hljs-number">.0</span>,&gt;=<span class="hljs-number">2.7</span><span class="hljs-number">.2</span>-&gt;mcp[cli])<br>  Using cached annotated_types<span class="hljs-number">-0.7</span><span class="hljs-number">.0</span>-py3-none-any.whl.metadata (<span class="hljs-number">15</span> kB)<br>Collecting pydantic-core==<span class="hljs-number">2.33</span><span class="hljs-number">.1</span> (from pydantic&lt;<span class="hljs-number">3.0</span><span class="hljs-number">.0</span>,&gt;=<span class="hljs-number">2.7</span><span class="hljs-number">.2</span>-&gt;mcp[cli])<br>  Downloading pydantic_core<span class="hljs-number">-2.33</span><span class="hljs-number">.1</span>-cp313-cp313-win_amd64.whl.metadata (<span class="hljs-number">6.9</span> kB)<br>Requirement already satisfied: typing-extensions&gt;=<span class="hljs-number">4.12</span><span class="hljs-number">.2</span> in c:\users\alphaorionis\appdata\local\packages\pythonsoftwarefoundation.python<span class="hljs-number">.3</span><span class="hljs-number">.13</span>_qbz5n2kfra8p0\localcache\local-packages\python313\site-packages (from pydantic&lt;<span class="hljs-number">3.0</span><span class="hljs-number">.0</span>,&gt;=<span class="hljs-number">2.7</span><span class="hljs-number">.2</span>-&gt;mcp[cli]) (<span class="hljs-number">4.12</span><span class="hljs-number">.2</span>)<br>Collecting typing-inspection&gt;=<span class="hljs-number">0.4</span><span class="hljs-number">.0</span> (from pydantic&lt;<span class="hljs-number">3.0</span><span class="hljs-number">.0</span>,&gt;=<span class="hljs-number">2.7</span><span class="hljs-number">.2</span>-&gt;mcp[cli])<br>  Downloading typing_inspection<span class="hljs-number">-0.4</span><span class="hljs-number">.0</span>-py3-none-any.whl.metadata (<span class="hljs-number">2.6</span> kB)<br>Collecting click&gt;=<span class="hljs-number">8.0</span><span class="hljs-number">.0</span> (from typer&gt;=<span class="hljs-number">0.12</span><span class="hljs-number">.4</span>-&gt;mcp[cli])<br>  Using cached click<span class="hljs-number">-8.1</span><span class="hljs-number">.8</span>-py3-none-any.whl.metadata (<span class="hljs-number">2.3</span> kB)<br>Collecting shellingham&gt;=<span class="hljs-number">1.3</span><span class="hljs-number">.0</span> (from typer&gt;=<span class="hljs-number">0.12</span><span class="hljs-number">.4</span>-&gt;mcp[cli])<br>  Using cached shellingham<span class="hljs-number">-1.5</span><span class="hljs-number">.4</span>-py2.py3-none-any.whl.metadata (<span class="hljs-number">3.5</span> kB)<br>Collecting rich&gt;=<span class="hljs-number">10.11</span><span class="hljs-number">.0</span> (from typer&gt;=<span class="hljs-number">0.12</span><span class="hljs-number">.4</span>-&gt;mcp[cli])<br>  Downloading rich<span class="hljs-number">-14.0</span><span class="hljs-number">.0</span>-py3-none-any.whl.metadata (<span class="hljs-number">18</span> kB)<br>Collecting colorama (from click&gt;=<span class="hljs-number">8.0</span><span class="hljs-number">.0</span>-&gt;typer&gt;=<span class="hljs-number">0.12</span><span class="hljs-number">.4</span>-&gt;mcp[cli])<br>  Using cached colorama<span class="hljs-number">-0.4</span><span class="hljs-number">.6</span>-py2.py3-none-any.whl.metadata (<span class="hljs-number">17</span> kB)<br>Collecting markdown-it-py&gt;=<span class="hljs-number">2.2</span><span class="hljs-number">.0</span> (from rich&gt;=<span class="hljs-number">10.11</span><span class="hljs-number">.0</span>-&gt;typer&gt;=<span class="hljs-number">0.12</span><span class="hljs-number">.4</span>-&gt;mcp[cli])<br>  Using cached markdown_it_py<span class="hljs-number">-3.0</span><span class="hljs-number">.0</span>-py3-none-any.whl.metadata (<span class="hljs-number">6.9</span> kB)<br>Collecting pygments&lt;<span class="hljs-number">3.0</span><span class="hljs-number">.0</span>,&gt;=<span class="hljs-number">2.13</span><span class="hljs-number">.0</span> (from rich&gt;=<span class="hljs-number">10.11</span><span class="hljs-number">.0</span>-&gt;typer&gt;=<span class="hljs-number">0.12</span><span class="hljs-number">.4</span>-&gt;mcp[cli])<br>  Using cached pygments<span class="hljs-number">-2.19</span><span class="hljs-number">.1</span>-py3-none-any.whl.metadata (<span class="hljs-number">2.5</span> kB)<br>Collecting mdurl~=<span class="hljs-number">0.1</span> (from markdown-it-py&gt;=<span class="hljs-number">2.2</span><span class="hljs-number">.0</span>-&gt;rich&gt;=<span class="hljs-number">10.11</span><span class="hljs-number">.0</span>-&gt;typer&gt;=<span class="hljs-number">0.12</span><span class="hljs-number">.4</span>-&gt;mcp[cli])<br>  Using cached mdurl<span class="hljs-number">-0.1</span><span class="hljs-number">.2</span>-py3-none-any.whl.metadata (<span class="hljs-number">1.6</span> kB)<br>Downloading anyio<span class="hljs-number">-4.9</span><span class="hljs-number">.0</span>-py3-none-any.whl (<span class="hljs-number">100</span> kB)<br>Using cached httpx<span class="hljs-number">-0.28</span><span class="hljs-number">.1</span>-py3-none-any.whl (<span class="hljs-number">73</span> kB)<br>Downloading httpcore<span class="hljs-number">-1.0</span><span class="hljs-number">.8</span>-py3-none-any.whl (<span class="hljs-number">78</span> kB)<br>Using cached httpx_sse<span class="hljs-number">-0.4</span><span class="hljs-number">.0</span>-py3-none-any.whl (<span class="hljs-number">7.8</span> kB)<br>Downloading pydantic<span class="hljs-number">-2.11</span><span class="hljs-number">.3</span>-py3-none-any.whl (<span class="hljs-number">443</span> kB)<br>Downloading pydantic_core<span class="hljs-number">-2.33</span><span class="hljs-number">.1</span>-cp313-cp313-win_amd64.whl (<span class="hljs-number">2.0</span> MB)<br>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class="hljs-number">2.0</span>/<span class="hljs-number">2.0</span> MB <span class="hljs-number">21.2</span> MB/s eta <span class="hljs-number">0</span>:<span class="hljs-number">00</span>:<span class="hljs-number">00</span><br>Downloading pydantic_settings<span class="hljs-number">-2.9</span><span class="hljs-number">.1</span>-py3-none-any.whl (<span class="hljs-number">44</span> kB)<br>Downloading python_dotenv<span class="hljs-number">-1.1</span><span class="hljs-number">.0</span>-py3-none-any.whl (<span class="hljs-number">20</span> kB)<br>Downloading sse_starlette<span class="hljs-number">-2.2</span><span class="hljs-number">.1</span>-py3-none-any.whl (<span class="hljs-number">10</span> kB)<br>Downloading starlette<span class="hljs-number">-0.46</span><span class="hljs-number">.2</span>-py3-none-any.whl (<span class="hljs-number">72</span> kB)<br>Downloading typer<span class="hljs-number">-0.15</span><span class="hljs-number">.2</span>-py3-none-any.whl (<span class="hljs-number">45</span> kB)<br>Downloading uvicorn<span class="hljs-number">-0.34</span><span class="hljs-number">.2</span>-py3-none-any.whl (<span class="hljs-number">62</span> kB)<br>Downloading mcp<span class="hljs-number">-1.6</span><span class="hljs-number">.0</span>-py3-none-any.whl (<span class="hljs-number">76</span> kB)<br>Using cached annotated_types<span class="hljs-number">-0.7</span><span class="hljs-number">.0</span>-py3-none-any.whl (<span class="hljs-number">13</span> kB)<br>Using cached click<span class="hljs-number">-8.1</span><span class="hljs-number">.8</span>-py3-none-any.whl (<span class="hljs-number">98</span> kB)<br>Downloading rich<span class="hljs-number">-14.0</span><span class="hljs-number">.0</span>-py3-none-any.whl (<span class="hljs-number">243</span> kB)<br>Using cached shellingham<span class="hljs-number">-1.5</span><span class="hljs-number">.4</span>-py2.py3-none-any.whl (<span class="hljs-number">9.8</span> kB)<br>Downloading typing_inspection<span class="hljs-number">-0.4</span><span class="hljs-number">.0</span>-py3-none-any.whl (<span class="hljs-number">14</span> kB)<br>Using cached markdown_it_py<span class="hljs-number">-3.0</span><span class="hljs-number">.0</span>-py3-none-any.whl (<span class="hljs-number">87</span> kB)<br>Using cached pygments<span class="hljs-number">-2.19</span><span class="hljs-number">.1</span>-py3-none-any.whl (<span class="hljs-number">1.2</span> MB)<br>Using cached colorama<span class="hljs-number">-0.4</span><span class="hljs-number">.6</span>-py2.py3-none-any.whl (<span class="hljs-number">25</span> kB)<br>Using cached mdurl<span class="hljs-number">-0.1</span><span class="hljs-number">.2</span>-py3-none-any.whl (<span class="hljs-number">10.0</span> kB)<br>Installing collected packages: typing-inspection, shellingham, python-dotenv, pygments, pydantic-core, mdurl, httpx-sse, httpcore, colorama, anyio, annotated-types, starlette, pydantic, markdown-it-py, httpx, click, uvicorn, sse-starlette, rich, pydantic-settings, typer, mcp<br>  WARNING: The script dotenv.exe is installed in <span class="hljs-string">&#x27;C:\Users\alphaorionis\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\Scripts&#x27;</span> which is not on PATH.<br>  Consider adding this directory to PATH or, <span class="hljs-keyword">if</span> you prefer to suppress this warning, use --no-warn-script-location.<br>  WARNING: The script pygmentize.exe is installed in <span class="hljs-string">&#x27;C:\Users\alphaorionis\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\Scripts&#x27;</span> which is not on PATH.<br>  Consider adding this directory to PATH or, <span class="hljs-keyword">if</span> you prefer to suppress this warning, use --no-warn-script-location.<br>  WARNING: The script markdown-it.exe is installed in <span class="hljs-string">&#x27;C:\Users\alphaorionis\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\Scripts&#x27;</span> which is not on PATH.<br>  Consider adding this directory to PATH or, <span class="hljs-keyword">if</span> you prefer to suppress this warning, use --no-warn-script-location.<br>  WARNING: The script httpx.exe is installed in <span class="hljs-string">&#x27;C:\Users\alphaorionis\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\Scripts&#x27;</span> which is not on PATH.<br>  Consider adding this directory to PATH or, <span class="hljs-keyword">if</span> you prefer to suppress this warning, use --no-warn-script-location.<br>  WARNING: The script uvicorn.exe is installed in <span class="hljs-string">&#x27;C:\Users\alphaorionis\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\Scripts&#x27;</span> which is not on PATH.<br>  Consider adding this directory to PATH or, <span class="hljs-keyword">if</span> you prefer to suppress this warning, use --no-warn-script-location.<br>  WARNING: The script typer.exe is installed in <span class="hljs-string">&#x27;C:\Users\alphaorionis\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\Scripts&#x27;</span> which is not on PATH.<br>  Consider adding this directory to PATH or, <span class="hljs-keyword">if</span> you prefer to suppress this warning, use --no-warn-script-location.<br>  WARNING: The script mcp.exe is installed in <span class="hljs-string">&#x27;C:\Users\alphaorionis\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\Scripts&#x27;</span> which is not on PATH.<br>  Consider adding this directory to PATH or, <span class="hljs-keyword">if</span> you prefer to suppress this warning, use --no-warn-script-location.<br>Successfully installed annotated-types<span class="hljs-number">-0.7</span><span class="hljs-number">.0</span> anyio<span class="hljs-number">-4.9</span><span class="hljs-number">.0</span> click<span class="hljs-number">-8.1</span><span class="hljs-number">.8</span> colorama<span class="hljs-number">-0.4</span><span class="hljs-number">.6</span> httpcore<span class="hljs-number">-1.0</span><span class="hljs-number">.8</span> httpx<span class="hljs-number">-0.28</span><span class="hljs-number">.1</span> httpx-sse<span class="hljs-number">-0.4</span><span class="hljs-number">.0</span> markdown-it-py<span class="hljs-number">-3.0</span><span class="hljs-number">.0</span> mcp<span class="hljs-number">-1.6</span><span class="hljs-number">.0</span> mdurl<span class="hljs-number">-0.1</span><span class="hljs-number">.2</span> pydantic<span class="hljs-number">-2.11</span><span class="hljs-number">.3</span> pydantic-core<span class="hljs-number">-2.33</span><span class="hljs-number">.1</span> pydantic-settings<span class="hljs-number">-2.9</span><span class="hljs-number">.1</span> pygments<span class="hljs-number">-2.19</span><span class="hljs-number">.1</span> python-dotenv<span class="hljs-number">-1.1</span><span class="hljs-number">.0</span> rich<span class="hljs-number">-14.0</span><span class="hljs-number">.0</span> shellingham<span class="hljs-number">-1.5</span><span class="hljs-number">.4</span> sse-starlette<span class="hljs-number">-2.2</span><span class="hljs-number">.1</span> starlette<span class="hljs-number">-0.46</span><span class="hljs-number">.2</span> typer<span class="hljs-number">-0.15</span><span class="hljs-number">.2</span> typing-inspection<span class="hljs-number">-0.4</span><span class="hljs-number">.0</span> uvicorn<span class="hljs-number">-0.34</span><span class="hljs-number">.2</span><br><br>C:\Users\alphaorionis&gt;<br><br></code></pre></td></tr></table></figure>
+
+<p>返回以上信息，代表安装成功。</p>
+<p>配置好后，此时需要新开一个CMD，输入MCP验证是否生效。</p>
+<p>代码环境搭建完成。</p>
+<h2 id="五、配置json文件："><a href="#五、配置json文件：" class="headerlink" title="五、配置json文件："></a>五、配置json文件：</h2><h3 id="配置json文件内容如下："><a href="#配置json文件内容如下：" class="headerlink" title="配置json文件内容如下："></a>配置json文件内容如下：</h3><p>注意修改文件路径。<br>可以通过Claude调用，也可以用cursor，或者VScode+Cline，或者CherryStudio应用。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs bash"><br>&#123;<br>  <span class="hljs-string">&quot;mcpServers&quot;</span>: &#123;<br>    <span class="hljs-string">&quot;powershell&quot;</span>: &#123;<br>      <span class="hljs-string">&quot;command&quot;</span>: <span class="hljs-string">&quot;python&quot;</span>,<br>      <span class="hljs-string">&quot;args&quot;</span>: [<br>        <span class="hljs-string">&quot;C:\\Users\\root\\Desktop\\MCP\\powershell.py&quot;</span>（这里写你自己的路径）<br>      ]<br>    &#125;<br>  &#125;<br>&#125;<br><br></code></pre></td></tr></table></figure>
+
+<p>打开Claude，工具生效。</p>
+<h2 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h2><p>powershell基本上可以对你的电脑做你任何想做的事情。</p>
+<p>如：<br>根据文件做个小报告。<br>桌面上有哪些文件？整理XXX文件到XXX文件夹。<br>操作具体Excel、CSV，根据内容生成专业的HTML可视化分析报告。<br>轻量级数据清洗。<br>等等等等……</p>
+<p>数据可视化示例：<br>可以用具体的表，在开源网站<a target="_blank" rel="noopener" href="https://visactor.io/vchart/">vchart</a>中选择一个视图样式，将视图右边的代码复制粘贴给AI，让AI模仿这个数据展示形式，结合你的数据，做出可视化。<br>原理：让AI使用Powershell读取Excel，操作Excel。</p>
+<p>操作其他文档大同小异。</p>
+<p>个人认为，使用体验总体要比filesystem-mcp可用性高。<br>我是放在Mac下通过PD带Windows使用的。<br>放在虚拟机Windows时能防止一些危险操作，以保证定期备份系统随时可以在一分钟内恢复。<br>这个很考验大模型的编码能力。</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Technical-Manual/" class="print-no-link">#Technical Manual</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>AI终端-Powershell-MCP-Server</div>
+      <div>https://alphaorionis.top/2025/04/24/AI_MCP_Powershell_Server/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Libo Yu</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2025年4月24日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2025/05/13/AnthropicThoughtProtocol/" title="Anthropic思维协议">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Anthropic思维协议</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2025/04/24/SharedResources/" title="工具资源分享">
+                        <span class="hidden-mobile">工具资源分享</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#comments', function() {
+      var light = 'github-light';
+      var dark = 'github-dark';
+      var schema = document.documentElement.getAttribute('data-user-color-scheme');
+      if (schema === 'dark') {
+        schema = dark;
+      } else {
+        schema = light;
+      }
+      window.UtterancesThemeLight = light;
+      window.UtterancesThemeDark = dark;
+      var s = document.createElement('script');
+      s.setAttribute('src', 'https://utteranc.es/client.js');
+      s.setAttribute('repo', 'AlphaOrionis9527/AlphaOrionis.github.io');
+      s.setAttribute('issue-term', 'title');
+      
+      s.setAttribute('label', 'utterances');
+      
+      s.setAttribute('theme', schema);
+      s.setAttribute('crossorigin', 'anonymous');
+      document.getElementById('comments').appendChild(s);
+    })
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
