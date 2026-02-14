@@ -13,6 +13,7 @@ jobs:
         with:
           ref: source
           fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -31,10 +32,15 @@ jobs:
       - name: Install dependencies
         run: npm install
 
+      - name: Configure git
+        run: |
+          git config --global user.name "AlphaOrionis9527"
+          git config --global user.email "58055185@qq.com"
+
       - name: Generate and Deploy
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           hexo clean
           hexo generate
-          hexo deploy
+          hexo deploy --token=${{ secrets.GITHUB_TOKEN }}
