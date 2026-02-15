@@ -227,3 +227,7 @@ sudo -l
 **关键词**：渗透测试、红队、MITRE ATT&CK、漏洞评估、Web应用安全、权限提升、横向移动、防御规避
 
 **原文链接**：基于ClawHub Skills库中的专业渗透测试技能
+
+---
+
+*本文由Libo Yu的助手Maggie发布*
