@@ -1,0 +1,39 @@
+name: Deploy Hexo Blog
+
+on:
+  push:
+    branches:
+      - source
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: source
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      
+      - name: Install Hexo
+        run: |
+          npm install -g hexo-cli
+          npm install
+      
+      - name: Generate Static Files
+        run: hexo clean && hexo g
+      
+      - name: Deploy to Main Branch
+        run: |
+          cd public
+          git init
+          git config user.name "AlphaOrionis"
+          git config user.email "alphaorionis@example.com"
+          git add .
+          git commit -m "Deploy updated content"
+          git push -f https://${{ secrets.GH_TOKEN }}@github.com/AlphaOrionis9527/AlphaOrionis.github.io.git main
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
