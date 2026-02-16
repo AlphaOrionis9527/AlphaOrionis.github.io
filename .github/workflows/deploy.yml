@@ -27,8 +27,7 @@ jobs:
         run: hexo clean && hexo g
       
       - name: Deploy to Main Branch
-        uses: Cythes/hexo-deployer@v1.1.0
+        uses: JamesIves/github-pages-deploy-action@v4
         with:
-          args: --token ${{ secrets.GITHUB_TOKEN }}
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          branch: main
+          folder: public
