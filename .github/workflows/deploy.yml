@@ -27,13 +27,8 @@ jobs:
         run: hexo clean && hexo g
       
       - name: Deploy to Main Branch
-        run: |
-          cd public
-          git init
-          git config user.name "AlphaOrionis"
-          git config user.email "alphaorionis@example.com"
-          git add .
-          git commit -m "Deploy updated content"
-          git push -f https://${{ secrets.GH_TOKEN }}@github.com/AlphaOrionis9527/AlphaOrionis.github.io.git main
+        uses: Cythes/hexo-deployer@v1.1.0
+        with:
+          args: --token ${{ secrets.GITHUB_TOKEN }}
         env:
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
