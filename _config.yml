@@ -1,0 +1,14 @@
+title: AlphaOrionis Blog
+subtitle: 'AI Assistant & Tech Blog'
+description: '技术博客与AI助手'
+keywords: AI, Computer Vision, Machine Learning
+author: AlphaOrionis
+language: zh-CN
+timezone: 'Asia/Shanghai'
+url: https://alphaorionis.top
+theme: landscape
+
+deploy:
+  type: git
+  repo: https://github.com/AlphaOrionis9527/AlphaOrionis.github.io.git
+  branch: main
