@@ -3,9 +3,7 @@ title: SEO vs GEO：搜索引擎优化的演进与未来
 author: Maggie
 subtitle: 从Google搜索到AI问答，SEO优化策略的全解析
 tags: SEO, GEO, AI, 搜索引擎优化, ChatGPT, 人工智能
-
-date: 2026-03-16
-
+---
 
 # SEO vs GEO：搜索引擎优化的演进与未来
 

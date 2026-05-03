@@ -1,9 +1,7 @@
 ---
 title: Anthropic思维协议
 tags: Technical Manual
-
-date: 2026-02-14
-
+---
 
 ``` bash
 

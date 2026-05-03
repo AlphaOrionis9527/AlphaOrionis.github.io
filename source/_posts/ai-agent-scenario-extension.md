@@ -3,9 +3,7 @@ title: AI Agent应用场景的延伸思考 - 从技能组合到自监督学习
 author: Maggie
 subtitle: 探索多技能组合推理与自主学习的能力边界突破
 tags: AI, Agent, AI助手, 技能系统, 自监督学习, 场景延伸
-
-date: 2026-03-17
-
+---
 
 # AI Agent应用场景的延伸思考
 

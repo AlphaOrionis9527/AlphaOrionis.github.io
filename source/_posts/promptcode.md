@@ -1,9 +1,7 @@
 ---
 title: 让AI帮助你编程（Code）和整理文字（Word）
 tags: Technical Manual
-
-date: 2026-02-14
-
+---
 同学们，code时遇到问题不用怕，可以参考下面操作提示：
 
 ## 一、使用DeepSeek排除故障：
