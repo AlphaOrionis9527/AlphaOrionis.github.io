@@ -103,8 +103,9 @@ theme: fluid
 ## Docs: https://hexo.io/docs/one-command-deployment
 deploy:
   type: git
-  repository: git@github.com:AlphaOrionis9527/AlphaOrionis.github.io.git
+  repository: https://github.com/AlphaOrionis9527/AlphaOrionis.github.io.git
   branch: main
+  token: $GITHUB_TOKEN
 
 # discuss
 post:
