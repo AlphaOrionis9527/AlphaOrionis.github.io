@@ -1,7 +1,9 @@
 ---
 title: Personal-Insights
 tags: Insights
----
+
+date: 2026-02-14
+
 
 ## Prompt：
 摘录、转化、概括一段话，分享给即将面临就业的你们：

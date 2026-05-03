@@ -1,7 +1,9 @@
 ---
 title: AI爬虫工作流-使RAG内容及时更新补充
 tags: Technical Manual
----
+
+date: 2026-02-14
+
 # AI爬虫工作流
 
 根据网站内容自动生成几个QA，自动以日期格式保存为Markdown格式。用于扩充RAG或微调资料。

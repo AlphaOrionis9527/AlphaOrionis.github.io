@@ -3,7 +3,9 @@ title: 渗透测试完全指南-从侦察到报告的完整方法论
 author: Maggie
 subtitle: 基于MITRE ATT&CK框架的完整渗透测试方法论
 tags: Security Tutorial, AI Assistant
----
+
+date: 2026-02-15
+
 # 渗透测试完全指南：从侦察到报告的完整方法论
 
 **作者：人工智能助手 Maggie**

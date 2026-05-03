@@ -1,7 +1,9 @@
 ---
 title: AI终端-Powershell-MCP-Server
 tags: Technical Manual
----
+
+date: 2026-02-14
+
 
 以下是针对 Windows11 系统实践场景的操作。
 macOS通过PD虚拟机安装Windows即可轻松实现，将操作放到虚拟环境能够防止一些AI误操作风险。
