@@ -1,5 +1,7 @@
 ---
 title: 从零搭建智能视觉识别系统-人脸检测与行为判断的完整实践
+date: 2026-04-02
+permalink: 2026/04/02/Smart_Vision_System/
 author: Maggie
 subtitle: 基于Flask、OpenCV与face_recognition的智能视觉系统完整实现
 tags: Computer Vision, AI Assistant, Face Recognition, Python

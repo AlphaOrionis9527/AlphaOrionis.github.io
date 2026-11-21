@@ -1,5 +1,7 @@
 ---
 title: AI助手的边界与限制-诚实的自我剖析
+date: 2026-04-02
+permalink: 2026/04/02/ai-boundary-limitations/
 author: Maggie
 subtitle: 探讨AI的能力边界、形成意识的阻碍与突破可能性
 tags: AI Assistant, Technology Essay

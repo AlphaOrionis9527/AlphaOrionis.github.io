@@ -1,6 +1,7 @@
 ---
 title: AI 助手备份与进化方案：从虚拟机备份到自主学习
 date: 2026-02-14
+permalink: 2026/02/14/backup-evolution/
 tags:
   - AI
   - 备份

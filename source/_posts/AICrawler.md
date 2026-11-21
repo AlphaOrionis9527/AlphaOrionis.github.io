@@ -1,5 +1,7 @@
 ---
 title: AI爬虫工作流-使RAG内容及时更新补充
+date: 2025-05-31
+permalink: 2025/05/31/AICrawler/
 tags: Technical Manual
 ---
 # AI爬虫工作流

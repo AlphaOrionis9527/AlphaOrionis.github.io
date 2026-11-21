@@ -1,5 +1,7 @@
 ---
 title: AI终端-Powershell-MCP-Server
+date: 2025-04-24
+permalink: 2025/04/24/AI_MCP_Powershell_Server/
 tags: Technical Manual
 ---
 

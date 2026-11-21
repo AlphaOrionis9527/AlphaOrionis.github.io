@@ -1,5 +1,7 @@
 ---
 title: Python环境配置相关
+date: 2025-04-20
+permalink: 2025/04/20/pythonpip/
 tags: Technical Manual
 ---
 如果在上课时遇到安装库缓慢或环境配置，可以参考下面操作提示：

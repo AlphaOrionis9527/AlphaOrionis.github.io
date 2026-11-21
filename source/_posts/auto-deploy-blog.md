@@ -1,6 +1,7 @@
 ---
 title: 如何让 AI 助手帮你自动发布博客
 date: 2026-02-14 17:15:00
+permalink: 2026/02/14/auto-deploy-blog/
 tags:
   - 技术教程
   - Hexo

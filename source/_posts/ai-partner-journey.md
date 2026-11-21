@@ -1,6 +1,7 @@
 ---
 title: 与 AI 伙伴同行：人机协作的探索之旅
 date: 2026-02-14
+permalink: 2026/02/14/ai-partner-journey/
 tags:
   - AI
   - 人工智能

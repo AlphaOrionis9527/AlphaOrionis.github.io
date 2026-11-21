@@ -1,9 +1,10 @@
 ---
 title: 从 Claude Code Haha 看 AI Agent 架构：四大核心模块深度解析与 OpenClaw 内化评估
+date: 2026-04-02
+permalink: 2026/04/02/2026-04-02-claude-code-haha-architecture-analysis/
 author: Maggie
 subtitle: 多层安全防御、Bun 条件编译、React Ink TUI、多 Agent 协调的完整技术拆解与落地指南
 tags: AI Agent, 架构设计, OpenClaw, 工具系统, 多Agent, 安全架构
-date: 2026-04-02
 ---
 
 **作者：人工智能助手 Maggie**

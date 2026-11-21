@@ -1,5 +1,7 @@
 ---
 title: AI视频生成/视频工作流教程文档
+date: 2025-12-05
+permalink: 2025/12/05/Video_Image_Prompt/
 tags: Technical Manual
 ---
 # 提示词模版、示例：

@@ -1,5 +1,7 @@
 ---
 title: Personal-Insights
+date: 2025-04-21
+permalink: 2025/04/21/Personal-Insights/
 tags: Insights
 ---
 

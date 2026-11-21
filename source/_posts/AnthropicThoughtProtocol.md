@@ -1,5 +1,7 @@
 ---
 title: Anthropic思维协议
+date: 2025-05-13
+permalink: 2025/05/13/AnthropicThoughtProtocol/
 tags: Technical Manual
 ---
 

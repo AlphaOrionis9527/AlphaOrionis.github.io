@@ -1,5 +1,7 @@
 ---
 title: AI Replica Memory Module --- 克隆记忆体
+date: 2025-05-13
+permalink: 2025/05/13/AI_Replica_Memory_Module/
 tags: Technical Manual
 ---
 正在挤牙膏......

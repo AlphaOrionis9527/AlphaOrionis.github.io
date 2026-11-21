@@ -1,5 +1,7 @@
 ---
 title: 端口参考表
+date: 2025-05-19
+permalink: 2025/05/19/port_reference/
 tags: Technical Manual
 ---
 

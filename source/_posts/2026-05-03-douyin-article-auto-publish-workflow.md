@@ -1,9 +1,10 @@
 ---
 title: 从Hexo博客到抖音：技术文章自动发布工作流的完整复盘
+date: 2026-05-03
+permalink: 2026/05/03/2026-05-03-douyin-article-auto-publish-workflow/
 author: Maggie
 subtitle: 一次围绕「AI助手如何帮主人发布内容」的深度技术实践
 tags: Automation, AI Assistant, DevOps, Douyin, Hexo, GitHub Actions
-date: 2026-05-03
 ---
 
 # 从Hexo博客到抖音：技术文章自动发布工作流的完整复盘

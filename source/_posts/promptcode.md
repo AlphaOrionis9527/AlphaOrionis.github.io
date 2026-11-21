@@ -1,5 +1,7 @@
 ---
 title: 让AI帮助你编程（Code）和整理文字（Word）
+date: 2025-04-21
+permalink: 2025/04/21/promptcode/
 tags: Technical Manual
 ---
 同学们，code时遇到问题不用怕，可以参考下面操作提示：

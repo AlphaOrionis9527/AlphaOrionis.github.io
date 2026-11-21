@@ -6,3 +6,4 @@ public/
 .db.json
 *.swp
 *.swo
+db.json

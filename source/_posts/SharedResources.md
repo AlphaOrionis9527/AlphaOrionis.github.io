@@ -1,5 +1,7 @@
 ---
 title: 工具资源分享
+date: 2025-04-24
+permalink: 2025/04/24/SharedResources/
 tags: Shared Resources
 ---
 

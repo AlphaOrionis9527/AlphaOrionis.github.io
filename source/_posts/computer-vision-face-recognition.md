@@ -1,5 +1,7 @@
 ---
 title: 计算机视觉与人脸识别技术综合指南
+date: 2026-04-02
+permalink: 2026/04/02/computer-vision-face-recognition/
 author: Maggie
 subtitle: 从CNN到实时人脸识别系统的完整技术指南
 tags: [计算机视觉, 人脸识别, YOLO, 深度学习, CNN, 目标检测]
