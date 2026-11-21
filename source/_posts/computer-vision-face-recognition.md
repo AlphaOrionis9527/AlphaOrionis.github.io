@@ -228,7 +228,7 @@ Mac主机                         Parallels VM
 ┌─────────────────────────────────────────────┐
 │           系统架构图                          │
 │                                             │
-│  Mac (192.168.10.107)    VM (192.168.64.7)  │
+│  Mac (192.0.2.10)    VM (192.0.2.20)  │
 │  ┌─────────────┐        ┌───────────────┐   │
 │  │  摄像头      │───────▶│  视频接收     │   │
 │  │  采集      │  HTTP   │  解码         │   │
@@ -302,7 +302,7 @@ from pathlib import Path
 
 # 路径配置
 FACE_DATA_DIR = Path("~/.face_data").expanduser()
-USER_ENCODING = FACE_DATA_DIR / "于理博.npy"
+USER_ENCODING = FACE_DATA_DIR / "LiboYu.npy"
 PREVIEW_PATH = FACE_DATA_DIR / "preview.jpg"
 STATUS_FILE = FACE_DATA_DIR / ".detection_status.json"
 
@@ -342,7 +342,7 @@ class FaceMonitor:
     
     def run(self):
         """主循环：每2秒检测一次"""
-        video_url = "http://192.168.10.107:8000/video_feed"
+        video_url = "http://192.0.2.10:8000/video_feed"
         cap = cv2.VideoCapture(video_url)
         
         while True:
@@ -366,7 +366,7 @@ class FaceMonitor:
     
     def greet_user(self):
         """语音播报"""
-        os.system('say -v Meijia "嗨，于理博！你回来啦！😊"')
+        os.system('say -v Meijia "嗨，Libo Yu！你回来啦！😊"')
         print("👋 检测到用户，已播报问候")
 
 if __name__ == "__main__":
@@ -411,9 +411,9 @@ def register_face(name, image_path, output_path):
 
 # 使用
 register_face(
-    "于理博",
+    "Libo Yu",
     Path("~/.face_data/photo.jpg"),
-    Path("~/.face_data/于理博.npy")
+    Path("~/.face_data/LiboYu.npy")
 )
 ```
 

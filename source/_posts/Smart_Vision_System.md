@@ -39,11 +39,11 @@ tags: Computer Vision, AI Assistant, Face Recognition, Python
 ┌─────────────────────────────────────────────────────────┐
 │                    系统架构                              │
 ├─────────────────────────────────────────────────────────┤
-│  Mac 主机 (192.168.10.107)                              │
+│  Mac 主机 (192.0.2.10)                              │
 │  ├── 📹 摄像头 → Flask MJPEG 服务器 (端口8000)          │
 │  └── 🎯 face_data/ → 用户人脸特征数据                   │
 │                                                       │
-│  Parallels VM (192.168.64.7)                          │
+│  Parallels VM (192.0.2.20)                          │
 │  ├── 🔄 视频流客户端 (每2秒轮询)                        │
 │  ├── 🧠 face_recognition (dlib深度学习模型)             │
 │  └── 🤖 行为判断引擎 (状态机逻辑)                        │
@@ -113,9 +113,9 @@ if __name__ == '__main__':
 
 由于虚拟机运行在独立的虚拟网络中，需要确保网络可达性：
 
-- **Mac主机IP**: 192.168.10.107
-- **虚拟机IP**: 192.168.64.7
-- **视频流地址**: `http://192.168.10.107:8000/video_feed`
+- **Mac主机IP**: 192.0.2.10
+- **虚拟机IP**: 192.0.2.20
+- **视频流地址**: `http://192.0.2.10:8000/video_feed`
 
 ## 三、人脸识别系统实现
 
@@ -144,7 +144,7 @@ class FaceRecognitionSystem:
         
     def load_user_face(self):
         """加载用户的人脸编码"""
-        encoding_path = self.face_data_path / '于理博.npy'
+        encoding_path = self.face_data_path / 'LiboYu.npy'
         preview_path = self.face_data_path / 'preview.jpg'
         
         if encoding_path.exists():
@@ -196,7 +196,7 @@ class FaceRecognitionSystem:
             if matches[0]:
                 results.append({
                     'index': i,
-                    'identity': '于理博',
+                    'identity': 'Libo Yu',
                     'confidence': 'high'
                 })
             else:
@@ -277,7 +277,7 @@ class BehaviorJudge:
         if detection_result['status'] == 'faces_detected':
             # 检测到人脸
             for ident in detection_result['identifications']:
-                if ident['identity'] == '于理博':
+                if ident['identity'] == 'Libo Yu':
                     self.handle_user_detected(current_time)
                     break
         else:
@@ -335,7 +335,7 @@ class BehaviorJudge:
         """触发语音问候"""
         import subprocess
         
-        greeting = "嗨，于理博！你回来啦！😊"
+        greeting = "嗨，Libo Yu！你回来啦！😊"
         print(f"🎤 触发问候: {greeting}")
         
         # 使用macOS say命令播放语音
@@ -411,7 +411,7 @@ class ContinuousMonitor:
     """持续监控器"""
     
     def __init__(self):
-        self.video_url = 'http://192.168.10.107:8000/video_feed'
+        self.video_url = 'http://192.0.2.10:8000/video_feed'
         self.face_system = FaceRecognitionSystem()
         self.behavior_judge = BehaviorJudge()
         self.status_file = Path.home() / '.face_data' / '.detection_status.json'
@@ -424,7 +424,7 @@ class ContinuousMonitor:
         """主监控循环"""
         print(f"🚀 人脸监控启动")
         print(f"📹 视频源: {self.video_url}")
-        print(f"👤 监控对象: 于理博")
+        print(f"👤 监控对象: Libo Yu")
         print("-" * 50)
         
         while True:
@@ -586,7 +586,7 @@ OPTIMIZATIONS = {
 
 本方案：
 ┌─────────────────┐
-│  于理博.npy      │  ← 隐私风险：低
+│  LiboYu.npy      │  ← 隐私风险：低
 │  [0.023, ...]   │  ← 128维特征向量
 │  (无法还原图像)   │
 └─────────────────┘
@@ -625,7 +625,7 @@ clawhub install media-processing   # 媒体处理
             │                   
             └────────────────────┐
                                  ▼
-                        "嗨，于理博！你回来啦！😊"
+                        "嗨，Libo Yu！你回来啦！😊"
 ```
 
 ## 八、部署与运维
@@ -645,7 +645,7 @@ echo "✅ 依赖正常"
 
 # 2. 视频服务器检查
 echo "[2/5] 检查视频服务器..."
-curl -s http://192.168.10.107:8000/video_feed > /dev/null && echo "✅ 视频流正常" || echo "❌ 视频流异常"
+curl -s http://192.0.2.10:8000/video_feed > /dev/null && echo "✅ 视频流正常" || echo "❌ 视频流异常"
 
 # 3. 人脸数据检查
 echo "[3/5] 检查人脸数据..."
